@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import "../assets/forms.css";
 
 export class Login extends Component {
   constructor(props) {
@@ -36,31 +37,42 @@ export class Login extends Component {
                   }
                 }}
               >
-                <div className="form-group">
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter Email..."
-                    value={this.state.email}
-                    onChange={(e) => this.setState({ email: e.target.value })}
-                  />
+                <div className="row">
+                  <div className="col-md-7">
+                    <div className="form-group">
+                      <label>Email</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Enter Email..."
+                        value={this.state.email}
+                        onChange={(e) =>
+                          this.setState({ email: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter Password..."
-                    value={this.state.password}
-                    onChange={(e) =>
-                      this.setState({ password: e.target.value })
-                    }
-                  />
+                <div className="row">
+                  <div className="col-md-7">
+                    <div className="form-group">
+                      <label>Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Enter Password..."
+                        value={this.state.password}
+                        onChange={(e) =>
+                          this.setState({ password: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
+
                 <div className="text-center">
                   <button className="btn btn-primary" type="submit">
-                    Sign Up!
+                    Login
                   </button>
                 </div>
               </form>

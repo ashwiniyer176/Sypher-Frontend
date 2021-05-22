@@ -8,8 +8,10 @@ import {
 } from "react-router-dom";
 import { connect } from "react-redux";
 import * as ChatActions from "./components/store/actions/chatActions";
+import * as AuthActions from "./components/store/actions/authActions";
 import React from "react";
 import Auth from "./components/pages/Auth";
+import Messenger from "./components/pages/Messenger";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
@@ -19,18 +21,53 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <button
+          onClick={(e) => {
+            this.props.logout();
+          }}
+        >
+          Log Out
+        </button>
         <BrowserRouter>
           <Switch>
             {/* Remember when using Switch, the root path should always be last */}
-            <Route path="/login" component={Auth} />
-            <Route path="/signup" component={Auth} />
+            <Route
+              path="/login"
+              render={(props) => {
+                if (this.props.token) {
+                  return <Redirect to="/" />;
+                } else {
+                  return <Auth />;
+                }
+              }}
+            />
+            <Route
+              path="/signup"
+              render={(props) => {
+                if (this.props.token) {
+                  return <Redirect to="/" />;
+                } else {
+                  return <Auth />;
+                }
+              }}
+            />
+            <Route
+              path="/:threadId"
+              render={(props) => {
+                if (!this.props.token) {
+                  <Redirect to="/login" />;
+                } else {
+                  return <Messenger />;
+                }
+              }}
+            />
             <Route
               path="/"
               render={(props) => {
                 if (!this.props.token) {
                   <Redirect to="/login" />;
                 } else {
-                  return <h1>Root</h1>;
+                  return <Messenger />;
                 }
               }}
             />
@@ -46,9 +83,12 @@ const mapStateToProps = (state) => ({
   ...state.chat,
 });
 
-const mapDispathToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   setupSocket: () => {
     dispatch(ChatActions.setupSocket());
   },
+  logout: () => {
+    dispatch(AuthActions.logout());
+  },
 });
-export default connect(mapStateToProps, mapDispathToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

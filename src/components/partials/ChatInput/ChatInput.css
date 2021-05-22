@@ -1,0 +1,15 @@
+.input-view {
+    position: fixed;
+    left: 300px;
+    width: 100%;
+    bottom: 5%;
+}
+
+.input-view .form-control{
+    border: none;
+    border-radius: 0px;
+    border-top:1px solid #ddd ;
+    height: auto;
+    font-size: 14px;
+    padding: 10px;
+}
