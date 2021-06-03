@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router";
-import "./ThreadView.css";
+import "../assets/styles.css";
+import Message from "./Message";
 
 class ThreadView extends Component {
   componentDidMount() {
@@ -29,7 +30,30 @@ class ThreadView extends Component {
     }
   };
   render() {
-    return <div className="thread-view">Hello from threadview</div>;
+    return (
+      <div className="main-view" id="main-view">
+        {this.props.threads
+          .filter((thread) => thread.id === this.props.match.params.threadId)
+          .map((thread, i) => {
+            return (
+              <div key={i} className="message-container">
+                {thread.Messages.map((msg, msgIndex) => {
+                  return (
+                    <Message
+                      msg={msg}
+                      key={msgIndex}
+                      profile={
+                        1
+                        // thread.profiles.filter((p) => p.id === msg.userId)[0]
+                      }
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+      </div>
+    );
   }
 }
 

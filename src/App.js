@@ -16,8 +16,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.setupSocket(this.props.token, this.props.userId);
+    console.log(this.props);
+    this.props.setupSocket(this.props.token, this.props.user.id);
   }
+
   render() {
     return (
       <div className="App">
@@ -45,7 +47,7 @@ class App extends React.Component {
               path="/signup"
               render={(props) => {
                 if (this.props.token) {
-                  return <Redirect to="/login" />;
+                  return <Redirect to="/" />;
                 } else {
                   return <Auth />;
                 }

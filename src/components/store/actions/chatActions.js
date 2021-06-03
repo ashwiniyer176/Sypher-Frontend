@@ -9,7 +9,10 @@ export const setupSocket = (token, userId) => {
         socket.send(
           JSON.stringify({
             type: "CONNECT_WITH_TOKEN",
-            data: { token: token, userId: userId },
+            data: {
+              token: token,
+              userId: userId,
+            },
           })
         );
         dispatch({
@@ -29,21 +32,51 @@ export const setupSocket = (token, userId) => {
         case "LOGGEDIN":
           dispatch(AuthActions.loggedIn(data));
           break;
+
         case "GOT_USERS":
-          console.log("Users in Action:", data);
           dispatch({
             type: "GOT_USERS",
             payload: data.data,
           });
           break;
+
         case "ADD_THREAD":
           dispatch({
             type: "ADD_THREAD",
             payload: data.data,
           });
-
           break;
 
+        case "INITIAL_THREADS":
+          dispatch({
+            type: "INITIAL_THREADS",
+            payload: data.data,
+          });
+          break;
+
+        case "GOT_MESSAGES":
+          console.log("Payload: ", data);
+          dispatch({
+            type: "GOT_MESSAGES",
+            payload: {
+              threadId: data.threadId,
+              messages: data.messages,
+            },
+          });
+          break;
+
+        case "ADD_MESSAGE_TO_THREAD":
+          console.log("Message Data:", data);
+          dispatch({
+            type: "ADD_SINGLE_MESSAGE",
+            payload: {
+              threadId: data.threadId,
+              message: data.message,
+            },
+          });
+          document.getElementById("main-view").scrollTop =
+            document.getElementById("main-view").scrollHeight;
+          break;
         default:
           console.log("Do Nothing");
       }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "../assets/forms.css";
+import "../assets/styles.css";
 
 export class Signup extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export class Signup extends Component {
                   if (this.props.socket) {
                     let empty = 0;
                     Object.keys(this.state).map((key) => {
-                      if (this.state[key] === "" && key != "error") {
+                      if (this.state[key] === "" && key !== "error") {
                         empty += 1;
                       }
                     });

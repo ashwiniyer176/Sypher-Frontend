@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import "./Sidebar.css";
+import "../assets/styles.css";
 class Sidebar extends Component {
   state = {
     search: "",
@@ -67,7 +67,7 @@ class Sidebar extends Component {
               return (
                 <Link to={`/${thread.id}`}>
                   <i className="zmdi zmdi-account-circle" />
-                  <h5>{thread.id}</h5>
+                  <h5>{thread.users[1]}</h5>
                   <p>This is the previous message</p>
                 </Link>
               );

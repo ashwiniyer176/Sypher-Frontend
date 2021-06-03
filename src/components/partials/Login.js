@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "../assets/forms.css";
+import "../assets/styles.css";
 
 export class Login extends Component {
   constructor(props) {
